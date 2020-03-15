@@ -35,13 +35,7 @@ class RestaurantControllerTest {
 
     @MockBean
     private RestaurantService restaurantService;
-
-    @SpyBean(RestaurantRepositoryImpl.class)
-    private RestaurantRepository restaurantRepository;
-
-    @SpyBean(MenuItemRepositoryImpl.class)
-    private MenuItemRepository menuItemRepository;
-
+    
     @Test
     public void list() throws Exception {
         List<Restaurant> restaurants = new ArrayList<>();
