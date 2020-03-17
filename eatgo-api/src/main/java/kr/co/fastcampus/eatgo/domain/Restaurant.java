@@ -67,4 +67,10 @@ public class Restaurant {
     public List<MenuItem> getMenuItems() {
         return menuItems;
     }
+
+
+    public void updateInformation(String name, String address) {
+        this.address = address;
+        this.name = name;
+    }
 }
