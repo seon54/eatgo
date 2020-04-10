@@ -39,7 +39,7 @@ class MenuItemControllerTests {
         List<MenuItem> menuItems = new ArrayList<>();
         menuItems.add(MenuItem.builder().name("Kimchi").build());
 
-        given(menuItemService.getMenuItems(1l)).willReturn(menuItems);
+        given(menuItemService.getMenuItems(1L)).willReturn(menuItems);
 
         mvc.perform(get("/restaurants/1/menuitems"))
                 .andExpect(status().isOk())
