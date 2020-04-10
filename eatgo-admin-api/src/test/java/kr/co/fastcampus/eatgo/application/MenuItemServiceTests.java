@@ -26,7 +26,7 @@ class MenuItemServiceTests {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
 
-        menuItemService = new MenuItemService(menuItemRepository);
+        menuItemService = new MenuItemService();
     }
 
     @Test
