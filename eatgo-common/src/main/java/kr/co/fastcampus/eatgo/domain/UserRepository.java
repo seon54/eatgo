@@ -9,5 +9,5 @@ public interface UserRepository extends CrudRepository<User, Long> {
 
     List<User> findAll();
 
-    Optional findById();
+    Optional<User> findById(Long id);
 }

@@ -36,13 +36,20 @@ public class UserController {
     }
 
     @PatchMapping("/users/{userId}")
-    public String update(@PathVariable("id") Long id,
+    public String update(@PathVariable("userId") Long id,
                        @RequestBody User resource) {
         String email = resource.getEmail();
         String name = resource.getName();
         Long level = resource.getLevel();
 
         userService.updateUser(id, email, name, level);
+
+        return "{}";
+    }
+
+    @DeleteMapping("/users/{userId}")
+    public String delete(@PathVariable("userId") Long id) {
+        userService.deactivateUser(id);
 
         return "{}";
     }
