@@ -43,6 +43,7 @@ class RestaurantServiceTest {
         Restaurant restaurant = Restaurant.builder()
                 .id(1004L)
                 .name("Bob zip")
+                .categoryId(1L)
                 .address("Seoul")
                 .menuItems(new ArrayList<MenuItem>())
                 .build();
