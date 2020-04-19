@@ -2,6 +2,8 @@ package kr.co.fastcampus.eatgo.interfaces;
 
 import kr.co.fastcampus.eatgo.application.RegionService;
 import kr.co.fastcampus.eatgo.domain.Region;
+import lombok.Builder;
+import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -33,5 +35,12 @@ public class RegionController {
         String url = "/regions/" + region.getId();
 
         return ResponseEntity.created(new URI(url)).body("{}");
+    }
+
+    @Data
+    @Builder
+    public static class SessionResponseDto {
+
+        private String accessToken;
     }
 }
