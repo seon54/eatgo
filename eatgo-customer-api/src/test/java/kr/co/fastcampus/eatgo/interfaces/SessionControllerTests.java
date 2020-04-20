@@ -13,6 +13,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 
+import static org.hamcrest.core.StringContains.containsString;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.verify;
@@ -31,10 +32,12 @@ class SessionControllerTests {
 
     @Test
     public void createWithValidAttributes() throws Exception {
+        Long id = 1004L;
+        String name = "Test";
         String email = "test@example.com";
         String password = "test";
 
-        User mockUser = User.builder().password("ACCESSTOKEN").build();
+        User mockUser = User.builder().id(id).name(name).build();
 
         given(userService.authenticate(email, password)).willReturn(mockUser);
 
@@ -43,7 +46,8 @@ class SessionControllerTests {
                 .content("{\"email\": \"test@example.com\", \"name\": \"Test\", \"password\": \"test\"}"))
                 .andExpect(status().isCreated())
                 .andExpect(header().string("location", "/session"))
-                .andExpect(content().string("{\"accessToken\":\"ACCESSTOKE\"}"));
+                .andExpect(content().string(containsString("{\"accessToken\":\"")))
+                .andExpect(content().string(containsString(".")));
 
         verify(userService).authenticate(eq(email), eq(password));
     }

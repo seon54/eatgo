@@ -2,7 +2,7 @@ package kr.co.fastcampus.eatgo.application;
 
 public class EmailNotExistedException extends RuntimeException {
 
-    EmailNotExistedException(String email) {
+    EmailNotExistedException() {
         super("Email is not registered.");
     }
 }

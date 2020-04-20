@@ -81,9 +81,9 @@ class UserServiceTests {
         String email = "x@example.com";
         String password = "test";
 
-        User mockUser = User.builder().email(email).build();
+        User mockUser = User.builder().build();
 
-//        given(userRepository.findByEmail(email)).willReturn(Optional.of(mockUser));
+        given(userRepository.findByEmail(email)).willReturn(Optional.of(mockUser));
 
         given(passwordEncoder.matches(any(), any())).willReturn(true);
 
