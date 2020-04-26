@@ -81,7 +81,8 @@ class UserServiceTests {
         String email = "x@example.com";
         String password = "test";
 
-        User mockUser = User.builder().build();
+//        User mockUser = User.builder().build();
+        User mockUser = User.builder().email(email).password(password).build();
 
         given(userRepository.findByEmail(email)).willReturn(Optional.of(mockUser));
 

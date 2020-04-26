@@ -28,7 +28,6 @@ public class SessionController {
 
         User user = userService.authenticate(email, password);
 
-//        String accessToken = jwtUtil.createToken(1004L, "John");
         String accessToken = jwtUtil.createToken(user.getId(), user.getName());
 
         String url = "/session";

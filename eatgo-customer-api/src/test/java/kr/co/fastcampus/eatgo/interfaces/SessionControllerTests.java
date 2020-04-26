@@ -4,6 +4,7 @@ import kr.co.fastcampus.eatgo.application.EmailNotExistedException;
 import kr.co.fastcampus.eatgo.application.PasswordWrongException;
 import kr.co.fastcampus.eatgo.application.UserService;
 import kr.co.fastcampus.eatgo.domain.User;
+import kr.co.fastcampus.eatgo.utils.JwtUtil;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +29,9 @@ class SessionControllerTests {
     private MockMvc mvc;
 
     @MockBean
+    private JwtUtil jwtUtil;
+
+    @MockBean
     private UserService userService;
 
     @Test
@@ -41,13 +45,14 @@ class SessionControllerTests {
 
         given(userService.authenticate(email, password)).willReturn(mockUser);
 
+        given(jwtUtil.createToken(id, name)).willReturn("header.payload.signature");
+
         mvc.perform(post("/session")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("{\"email\": \"test@example.com\", \"name\": \"Test\", \"password\": \"test\"}"))
                 .andExpect(status().isCreated())
                 .andExpect(header().string("location", "/session"))
-                .andExpect(content().string(containsString("{\"accessToken\":\"")))
-                .andExpect(content().string(containsString(".")));
+                .andExpect(content().string(containsString("{\"accessToken\":\"header.payload.signature\"}")));
 
         verify(userService).authenticate(eq(email), eq(password));
     }
